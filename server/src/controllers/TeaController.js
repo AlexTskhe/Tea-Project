@@ -111,7 +111,7 @@ class TeaController {
 
     
     if (isInvalidId(id)) {
-      return res.status(400).json(formatResponse(400, "Invalid post ID"));
+      return res.status(400).json(formatResponse(400, "Invalid tea ID"));
     }
 
     try {

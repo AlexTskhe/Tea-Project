@@ -19,9 +19,9 @@ class TeaService {
     const oneTea = await TeaService.getOneTea(id);
 
     if (oneTea) {
-      if (oneTea.dataValues.userId !== userId) {
-        throw new Error("Unauthorized: Only the author can delete this Tea");
-      }
+      // if (oneTea.dataValues.userId !== userId) {
+      //   throw new Error("Unauthorized: Only the author can delete this Tea");
+      // }
       await oneTea.update(data);
     }
 

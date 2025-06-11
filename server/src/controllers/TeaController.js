@@ -75,7 +75,7 @@ class TeaController {
       const { id } = res.locals; 
 
 
-      const { id: userId } = res.locals.user;
+      // const { id: userId } = res.locals.user;
 
       const { name, location, image, description } = req.body;
 
@@ -91,7 +91,7 @@ class TeaController {
       const updatedTea = await TeaService.editTea(
         { name, location, image, description },
         id,
-        userId
+        // userId
       );
       if (!updatedTea) {
         return res.status(400).json(formatResponse(400, "Tea not found"));

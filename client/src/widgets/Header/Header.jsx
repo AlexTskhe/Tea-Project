@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Header.module.css';
-import {NavLink} from 'react-router';
+import { NavLink } from 'react-router';
 export default function Header({ user, logoutHandler }) {
   return (
     <header className={styles.header}>
@@ -13,38 +13,14 @@ export default function Header({ user, logoutHandler }) {
         Главная
       </NavLink>
 
-      {user.status === 'logged' && user.data?.role === 'admin' && (
-        <NavLink
-          to='/workspace'
-          className={({ isActive }) =>
-            `${styles.link} ${isActive ? styles.active : ''}`
-          }
-        >
-          Рабочее пространство
-        </NavLink>
-      )}
-
-      {user.status === 'logged' && user.data?.role === 'user' && (
-        <NavLink
-          to='/boards'
-          className={({ isActive }) =>
-            `${styles.link} ${isActive ? styles.active : ''}`
-          }
-        >
-          Мои доски
-        </NavLink>
-      )}
-
-      {user.status === 'logged' && user.data?.role === 'user' && (
-        <NavLink
-          to='/alltasks'
-          className={({ isActive }) =>
-            `${styles.link} ${isActive ? styles.active : ''}`
-          }
-        >
-          Все задачи
-        </NavLink>
-      )}
+      <NavLink
+        to='/teasPage'
+        className={({ isActive }) =>
+          `${styles.link} ${isActive ? styles.active : ''}`
+        }
+      >
+        Все чаи
+      </NavLink>
 
       {user.status === 'logged' && <div>{user.data?.name}</div>}
 

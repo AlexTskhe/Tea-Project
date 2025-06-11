@@ -1,8 +1,10 @@
-const { Tea } = require("../../db/models/tea");
+const { Tea } = require("../../db/models");
 
 class TeaService {
   static async getAllTeas() {
+    // console.log("Проверка2")
     return await Tea.findAll();
+    
   }
 
   static async addTea(data) {

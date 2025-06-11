@@ -6,9 +6,10 @@ const TeaValidator = require("../utils/TeaValidator");
 class TeaController {
   
   static async getTeas(req, res) {
+    
     try {
       const teas = await TeaService.getAllTeas();
-      
+      // console.log("Проверка1")
       if (teas.length === 0) {
         return res.status(200).json(formatResponse(200, "Not teas found", []));
       }
@@ -106,7 +107,7 @@ class TeaController {
   static async deleteTea(req, res) {
     const { id } = req.params; 
 
-    const user = res.locals.user; 
+    const { id: userId } = res.locals.user; 
 
 
     
@@ -116,7 +117,7 @@ class TeaController {
 
     try {
       
-      const tea = await TeaService.delete(id, user.id);
+      const tea = await TeaService.delete(id, userId);
 
       
       if (!tea) {

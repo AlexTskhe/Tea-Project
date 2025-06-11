@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { TeaApi } from "../../entities/teas/TeaApi";
+import { Link } from "react-router";
 
 
 export default function TeaCard({ el, deleteHandler }) {
@@ -68,8 +69,10 @@ const toggleHandler = () => {
         )}
 
         <hr />
-        {toggle ? <button onClick={()=>{toggleHandler()}}>Изменить</button> : <button onClick={()=>{updateHandler}}>Сохранить</button>}
-        
+        {/* {toggle ? <button onClick={()=>{toggleHandler()}}>Изменить</button> : <button onClick={()=>{updateHandler}}>Сохранить</button>} */}
+
+        <Link  to={`/teasPage/${el.id}`} >Изменить</Link>
+
         <button onClick={()=>{deleteHandler(el.id)}}>Удалить</button>
       </div>
     </>

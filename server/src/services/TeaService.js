@@ -29,7 +29,7 @@ class TeaService {
     const tea = await TeaService.getOneTea(id);
 
     if (tea) {
-      if (tea.authorId !== userId) {
+      if (tea.userId !== userId) {
         throw new Error("Unauthorized: Only the author can delete this tea");
       }
 

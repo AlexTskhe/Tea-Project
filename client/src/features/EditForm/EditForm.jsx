@@ -11,7 +11,7 @@ const defaultValue = {
   description: '',
 };
 
-export default function EditForm({ tea, setTea }) {
+export default function EditForm({ tea, setTea, editHeandler }) {
   const [inputs, setInputs] = useState(tea);
   console.log(tea);
 
@@ -20,7 +20,6 @@ export default function EditForm({ tea, setTea }) {
       setInputs(tea);
     }
   }, [tea]);
-
 
   const inputHandler = (e) => {
     setInputs((inputs) => ({ ...inputs, [e.target.name]: e.target.value }));
@@ -33,10 +32,16 @@ export default function EditForm({ tea, setTea }) {
 
       if (isValid) {
         const data = await TeaApi.update(tea.id, inputs);
-        console.log('---------++', data);
+        console.log(data);
+        // после реализации авторизации удалить дублирование
+        setTea((tea) => ({ ...tea, ...data.data }));
+        setInputs(data);
+        editHeandler();
+        ///
         if (data.statusCode === 200 && data.data.accessToken) {
-          // setTea((tea) => [...tea, data.data.user]);
+          setTea((tea) => ({ ...tea, ...data.data }));
           setInputs(data);
+          editHeandler();
         } else {
           console.log(error);
         }
@@ -47,7 +52,7 @@ export default function EditForm({ tea, setTea }) {
       console.log(error);
     }
   }
-  
+
   return (
     <>
       <form onSubmit={submitHandler}>
@@ -63,7 +68,7 @@ export default function EditForm({ tea, setTea }) {
           value={inputs.description}
           name='description'
         />
-        <button>Редактировать</button>
+        <button>Сохранить</button>
       </form>
     </>
   );

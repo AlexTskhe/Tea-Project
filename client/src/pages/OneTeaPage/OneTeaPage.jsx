@@ -4,12 +4,13 @@ import { TeaApi } from '../../entities/teas/TeaApi';
 import { useParams } from 'react-router';
 import { useEffect } from 'react';
 import EditForm from '../../features/EditForm/EditForm';
+import TeaFullCard from '../../widgets/TeaFullCard/TeaFullCard';
 
 export default function OneTeaPage() {
   const [tea, setTea] = useState({});
+  const [editMode, setEditMode] = useState(true);
 
   const { id } = useParams();
-  console.log(' id:', id);
 
   useEffect(() => {
     async function getOneTea() {
@@ -27,10 +28,21 @@ export default function OneTeaPage() {
     getOneTea();
   }, [id]);
 
+  const editHeandler = () => {
+    setEditMode((prev) => !prev)
+  }
+
   return (
     <>
-      <div>{tea.name}</div>
-      <EditForm tea={tea} setTea={setTea} />
+      {editMode ? (
+        <>
+          <TeaFullCard tea={tea} />
+          <button onClick={editHeandler}>Редактировать</button>
+          
+        </>
+      ) : (
+        <EditForm tea={tea} setTea={setTea} editHeandler={editHeandler} />
+      )}
     </>
   );
 }

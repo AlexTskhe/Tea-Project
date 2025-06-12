@@ -5,10 +5,10 @@ import Layout from "../Layout/Layout";
 import TeaPage from "../../pages/TeaPage/TeaPage";
 import OneTeaPage from "../../pages/OneTeaPage/OneTeaPage";
 
-export default function Router() {
+export default function Router({ user, setUser }) {
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
+      <Route path="/" element={<Layout user={user}/>}>
         <Route path="/teaMap" element={<MainPage />} />
         <Route path="/teasPage" element={<TeaPage />} />
         <Route path="/teasPage/:id" element={<OneTeaPage />} />

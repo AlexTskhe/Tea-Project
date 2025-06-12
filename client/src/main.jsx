@@ -1,12 +1,13 @@
-import React  from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router'
+import { BrowserRouter } from 'react-router';
 // import './index.css';
 import App from './app/App';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <App />
-  </BrowserRouter>,
-)
+      <App />
+  </BrowserRouter>
+);

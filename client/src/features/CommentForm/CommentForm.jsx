@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import CommentValidator from '../../entities/Comment/Comment.validator';
 import { CommentApi } from '../../entities/Comment/CommentApi';
+
 const defaultValue = {
   commentText: '',
-  userId: 3,
+  userId: '',
   teaId: '',
 };
 
 export default function CommentForm({ user, tea, setComments }) {
+  // console.log('first', user.id)
   const [inputs, setInputs] = useState(defaultValue);
 
   const inputHandler = (e) => {
@@ -18,13 +20,14 @@ export default function CommentForm({ user, tea, setComments }) {
     e.preventDefault();
     try {
       //   const fullCommentData = { ...inputs, userId: user.id, teaId: tea.id };
-      const fullCommentData = { ...inputs, teaId: tea.id };
+      const fullCommentData = { ...inputs, teaId: tea?.id, userId: user?.id };
 
       const { isValid, error } = CommentValidator.validate(fullCommentData);
-
+      console.log('first', fullCommentData)
       if (isValid) {
         const data = await CommentApi.create(fullCommentData);
         const {id, commentText, teaId, userId, name } = data.data
+        // console.log(id, commentText, teaId, userId, name)
         // после реализации авторизации удалить дублирование
         setInputs(defaultValue);
         setComments((prev) => ([...prev, {id, commentText, teaId, userId, name }]))

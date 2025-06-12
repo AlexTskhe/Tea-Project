@@ -23,8 +23,7 @@ class CommentController {
   // создание комментария
   static async createComment(req, res) {
     const { commentText, teaId } = req.body;
-    // const { id: userId } = res.locals.user;
-    const userId = 3;
+    const { id: userId } = res.locals.user;
     const { isValid, error } = CommentValidator.validate({
       commentText,
       teaId,

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { TeaApi } from '../../entities/teas/TeaApi';
 import TeaCard from '../../widgets/TeaCard/TeaCard';
 
-export default function TeaPage() {
+export default function TeaPage({user}) {
   const [teas, setTeas] = useState([]);
 
   async function deleteHandler(id) {
@@ -36,7 +36,7 @@ export default function TeaPage() {
   return (
     <>
       {teas.map((el) => (
-        <TeaCard key={el.id} el={el} deleteHandler={deleteHandler} />
+        <TeaCard key={el.id} el={el} deleteHandler={deleteHandler} user={user} />
       ))}
     </>
   );

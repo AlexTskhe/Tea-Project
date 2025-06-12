@@ -15,8 +15,8 @@ export default function Router({ user, setUser }) {
         <Route path="/teaMap" element={<MainPage />} />
         <Route path="/singup" element={<AuthPage isAuthProp='singup' setUser={setUser}/>} />
         <Route path="/login" element={<AuthPage isAuthProp='login' setUser={setUser}/>} />
-        <Route path="/teasPage" element={<TeaPage />} />
-        <Route path="/teasPage/:id" element={<OneTeaPage />} />
+        <Route path="/teasPage" element={<TeaPage user={user} />} />
+        <Route path="/teasPage/:id" element={<OneTeaPage user={user} />} />
         <Route path="/addCard" element={<AddCard />} />
       </Route>
     </Routes>

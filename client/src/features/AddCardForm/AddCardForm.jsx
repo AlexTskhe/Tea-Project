@@ -28,7 +28,7 @@ const nav = useNavigate()
             if(valid.isValid) {
                const data = await TeaApi.addTea(inputs);
           console.log("Adeded data:", data);
-          if (data.statusCode === 200) {
+          if (data.statusCode === 201) {
             nav("/teasPage")
           }  
             }

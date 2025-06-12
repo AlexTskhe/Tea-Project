@@ -4,7 +4,6 @@ class TeaService {
   static async getAllTeas() {
     // console.log("Проверка2")
     return await Tea.findAll();
-    
   }
 
   static async addTea(data) {
@@ -27,11 +26,12 @@ class TeaService {
 
     return oneTea;
   }
-  static async delete(id, userId) {
+  static async delete(id, user) {
     const tea = await TeaService.getOneTea(id);
+    console.log("----------11111", id, user, tea);
 
     if (tea) {
-      if (tea.userId !== userId) {
+      if (tea.userId !== user.userId ) {
         throw new Error("Unauthorized: Only the author can delete this tea");
       }
 

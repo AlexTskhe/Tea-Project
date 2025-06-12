@@ -11,7 +11,7 @@ import AuthPage from "../../pages/AuthPage/AuthPage";
 export default function Router({ user, setUser }) {
   return (
     <Routes>
-      <Route path="/" element={<Layout user={user}/>}>
+      <Route path="/" element={<Layout user={user} setUser={setUser}/>}>
         <Route path="/teaMap" element={<MainPage />} />
         <Route path="/singup" element={<AuthPage isAuthProp='singup' setUser={setUser}/>} />
         <Route path="/login" element={<AuthPage isAuthProp='login' setUser={setUser}/>} />

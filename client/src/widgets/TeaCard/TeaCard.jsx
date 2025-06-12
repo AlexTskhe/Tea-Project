@@ -15,12 +15,24 @@ export default function TeaCard({ el, deleteHandler, user }) {
     setTeaCard((teaCard) => ({ ...teaCard, [e.target.name]: e.target.value }));
   };
 
-  const updateHandler = async () => {
-    try {
-      const data = await TeaApi.update(el.id, teaCard);
-      console.log('Updated data:', data);
-      if (data.statusCode === 200) {
-        toggleHandler();
+
+//   const updateHandler = async () => {
+//     try {
+//       const data = await TeaApi.update(el.id, teaCard);
+//       console.log('Updated data:', data);
+//       if (data.statusCode === 200) {
+//         toggleHandler();
+
+
+   const updateHandler = async () => {
+      try {
+        const data = await TeaApi.update(el.id, teaCard);
+        console.log("Updated data:", data);
+        if (data.statusCode === 200) {
+          toggleHandler();
+        }
+      } catch (error) {
+        console.log(error);
       }
     } catch (error) {
       console.log(error);

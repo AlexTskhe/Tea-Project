@@ -1,7 +1,23 @@
 import React, { useEffect } from 'react';
 import styles from './Header.module.css';
-import { NavLink } from 'react-router';
-export default function Header({ user, logoutHandler }) {
+import { NavLink, useNavigate } from 'react-router';
+import { UserApi } from '../../entities/User/UserApi';
+export default function Header({ user, setUser }) {
+  const navigate = useNavigate()
+  const logoutHandler = async () => {
+    try {
+      const data = await UserApi.logout()
+      if (data.statusCode === 200) {
+        setUser(() => ({}))
+        navigate('/')
+      } else {
+        console.log(data.error)
+      }
+    } catch (error) {
+      console.log(error)
+      return alert(error)
+    }
+  }
   return (
     <header className={styles.header}>
       <NavLink

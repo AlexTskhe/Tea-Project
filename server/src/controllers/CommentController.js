@@ -22,7 +22,6 @@ class CommentController {
 
   // создание комментария
   static async createComment(req, res) {
-    console.log('🚀 ~ CommentController ~ createComment ~ commentText:');
     const { commentText, teaId } = req.body;
     // const { id: userId } = res.locals.user;
     const userId = 3;
@@ -43,6 +42,7 @@ class CommentController {
         teaId,
         userId,
       });
+
       if (!newComment) {
         return res.status(400).json(formatResponse(400, 'Create failed'));
       }

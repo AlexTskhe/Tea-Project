@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './Header.module.css';
 import { NavLink } from 'react-router';
 export default function Header({ user, logoutHandler }) {
   return (
     <header className={styles.header}>
       <NavLink
-        to='/'
+        to='/teaMap'
         className={({ isActive }) =>
           `${styles.link} ${isActive ? styles.active : ''}`
         }
@@ -22,9 +22,15 @@ export default function Header({ user, logoutHandler }) {
         Все чаи
       </NavLink>
 
-      {user.status === 'logged' && <div>{user.data?.name}</div>}
+      {user?.name && <div>{user.name}</div>}
 
-      <NavLink
+      {user?.name ? (
+        <button className={styles.logoutBtn} onClick={logoutHandler}>
+          Выйти
+        </button>
+      ) : (
+        <>
+         <NavLink
         to='/login'
         className={({ isActive }) =>
           `${styles.link} ${isActive ? styles.active : ''}`
@@ -41,13 +47,7 @@ export default function Header({ user, logoutHandler }) {
       >
         Регистрация
       </NavLink>
-
-      {user.status === 'logged' ? (
-        <button className={styles.logoutBtn} onClick={logoutHandler}>
-          Выйти
-        </button>
-      ) : (
-        <NavLink to='/auth'>Войти</NavLink>
+        </>
       )}
     </header>
   );

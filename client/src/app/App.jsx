@@ -9,11 +9,9 @@ import { UserApi } from '../entities/User/UserApi';
 function App() {
   const [user, setUser] = useState({});
    useEffect(() => {
-    console.log('Зашли в useEffect')
     const getUser = async () => {
       try {
         const data = await UserApi.refresh()
-        console.log("refresh data:", data)
         if (data.statusCode === 200 && data.data.accessToken) {
           // ! ! ! ! ! !
           setUser((pre) => ({...pre, ...data.data.user}))

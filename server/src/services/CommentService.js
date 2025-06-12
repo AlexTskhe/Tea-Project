@@ -7,7 +7,7 @@ class CommentService {
 
   static async addComment(data) {
     const newComment = await Comment.create(data);
-    return await Comment.findOne({
+    const noFormatObj = await Comment.findOne({
       where: { id: newComment.id },
       include: {
         model: User,
@@ -15,10 +15,15 @@ class CommentService {
         attributes: ['name'],
       },
     });
+    const fullData = noFormatObj.get();
+    const userData = noFormatObj.user.get();
+    const merge = Object.assign({}, fullData, userData);
+    delete merge.user;
+    return merge;
   }
 
   static async getAllCommentsTea(teaId) {
-    return await Comment.findAll({
+    const noFormatObj = await Comment.findAll({
       where: { teaId },
       include: {
         model: User,
@@ -26,6 +31,15 @@ class CommentService {
         attributes: ['name'],
       },
     });
+
+    const formatData = noFormatObj.map((el) => {
+      const fullData = el.get();
+      const userData = el.user.get();
+      const merge =  Object.assign({}, fullData, userData);
+      delete merge.user;
+      return merge
+    });
+    return formatData
   }
 
   static async editComment(data, id, authorId) {

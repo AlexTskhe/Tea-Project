@@ -5,7 +5,7 @@ export default function CommentItem({ comment }) {
     <>
       <article className='comment-item'>
         <header>
-          <strong>{comment.user.name}</strong>
+          <strong>{comment.name}</strong>
         </header>
         <p>{comment.commentText}</p>
       </article>

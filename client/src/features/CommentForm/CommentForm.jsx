@@ -24,11 +24,10 @@ export default function CommentForm({ user, tea, setComments }) {
 
       if (isValid) {
         const data = await CommentApi.create(fullCommentData);
-        console.log("-----------", data.data);
-        const {id, commentText, teaId, userId, user.name } = data.data
+        const {id, commentText, teaId, userId, name } = data.data
         // после реализации авторизации удалить дублирование
         setInputs(defaultValue);
-        setComments((prev) => ([...prev, {id, commentText, teaId, userId }]))
+        setComments((prev) => ([...prev, {id, commentText, teaId, userId, name }]))
         ///
         if (data.statusCode === 200 && data.data.accessToken) {
           setInputs(defaultValue);

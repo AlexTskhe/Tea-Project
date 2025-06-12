@@ -32,13 +32,8 @@ export default function EditForm({ tea, setTea, editHeandler }) {
 
       if (isValid) {
         const data = await TeaApi.update(tea.id, inputs);
-        console.log(data);
-        // после реализации авторизации удалить дублирование
-        setTea((tea) => ({ ...tea, ...data.data }));
-        setInputs(data);
-        editHeandler();
-        ///
-        if (data.statusCode === 200 && data.data.accessToken) {
+
+        if (data.statusCode === 200 ) {
           setTea((tea) => ({ ...tea, ...data.data }));
           setInputs(data);
           editHeandler();

@@ -19,7 +19,7 @@ export default function OneTeaPage() {
     async function getOneTea() {
       try {
         const data = await TeaApi.getOne(id);
-        if (data.statusCode === 200) {
+        if (data.statusCode === 200 ) {
           setTea(data.data);
         } else {
           console.log(data);

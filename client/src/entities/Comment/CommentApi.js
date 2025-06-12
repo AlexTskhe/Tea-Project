@@ -11,7 +11,7 @@ export class CommentApi {
     return data;
   }
 
-  static async getOne(id) {
+  static async getAllCommentsTea(id) {
     const { data } = await axiosInstance.get(`/comments/${id}`);
     return data;
   }

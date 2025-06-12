@@ -1,3 +1,4 @@
+const { where } = require('sequelize');
 const { Comment } = require('../../db/models');
 
 class CommentService {
@@ -5,14 +6,12 @@ class CommentService {
     return await Comment.findAll();
   }
 
- 
   static async addComment(data) {
-    return await Comment.create(data); 
+    return await Comment.create(data);
   }
 
-
-  static async getOneComment(id) {
-    return await Comment.findByPk(id);
+  static async getAllCommentsTea(teaId) {
+    return await Comment.findAll({ where: { teaId } });
   }
 
   static async editComment(data, id, authorId) {
@@ -20,27 +19,30 @@ class CommentService {
 
     if (oneComment) {
       if (oneComment.dataValues.authorId !== authorId) {
-      throw new Error("Unauthorized: Only the author can delete this Comment");
-    }
-      await oneComment.update(data); 
+        throw new Error(
+          'Unauthorized: Only the author can delete this Comment'
+        );
+      }
+      await oneComment.update(data);
     }
 
     return oneComment;
   }
 
-static async delete(id, authorId) {
-  const comment = await CommentService.getOneComment(id);
+  static async delete(id, authorId) {
+    const comment = await CommentService.getOneComment(id);
 
-  if (comment) {
-    if (comment.authorId !== authorId) {
-      throw new Error("Unauthorized: Only the author can delete this comment");
+    if (comment) {
+      if (comment.authorId !== authorId) {
+        throw new Error(
+          'Unauthorized: Only the author can delete this comment'
+        );
+      }
+      await comment.destroy();
     }
-    await comment.destroy();
+
+    return comment;
   }
-
-  return comment;
-}
-
 }
 
 module.exports = CommentService;

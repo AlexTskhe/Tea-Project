@@ -22,9 +22,10 @@ class CommentController {
 
   // создание комментария
   static async createComment(req, res) {
+    console.log('🚀 ~ CommentController ~ createComment ~ commentText:');
     const { commentText, teaId } = req.body;
-    const { id: userId } = res.locals.user;
-
+    // const { id: userId } = res.locals.user;
+    const userId = 3;
     const { isValid, error } = CommentValidator.validate({
       commentText,
       teaId,
@@ -57,7 +58,7 @@ class CommentController {
     const { id } = res.locals;
 
     try {
-      const oneComment = await CommentService.getOneComment(id);
+      const oneComment = await CommentService.getAllCommentsTea(id);
       if (!oneComment) {
         return res.status(400).json(formatResponse(400, 'Comment not found'));
       }

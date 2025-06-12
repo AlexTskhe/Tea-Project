@@ -5,6 +5,8 @@ import { useParams } from 'react-router';
 import { useEffect } from 'react';
 import EditForm from '../../features/EditForm/EditForm';
 import TeaFullCard from '../../widgets/TeaFullCard/TeaFullCard';
+import CommentForm from '../../features/CommentForm/CommentForm';
+import CommentList from '../../widgets/CommentList/CommentList';
 
 export default function OneTeaPage() {
   const [tea, setTea] = useState({});
@@ -38,7 +40,8 @@ export default function OneTeaPage() {
         <>
           <TeaFullCard tea={tea} />
           <button onClick={editHeandler}>Редактировать</button>
-          
+          <CommentForm tea={tea} />
+          <CommentList tea={tea}/>
         </>
       ) : (
         <EditForm tea={tea} setTea={setTea} editHeandler={editHeandler} />

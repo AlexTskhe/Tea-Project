@@ -9,7 +9,7 @@ class TeaController {
     
     try {
       const teas = await TeaService.getAllTeas();
-      // console.log("Проверка1")
+      console.log("Проверка1")
       if (teas.length === 0) {
         return res.status(200).json(formatResponse(200, "Not teas found", []));
       }
@@ -105,9 +105,10 @@ class TeaController {
     }
   }
   static async deleteTea(req, res) {
+    
     const { id } = req.params; 
 
-    const { id: userId } = res.locals.user; 
+    const user  = res.locals; 
 
 
     
@@ -117,8 +118,8 @@ class TeaController {
 
     try {
       
-      const tea = await TeaService.delete(id, userId);
-
+      const tea = await TeaService.delete(id, user);
+      console.log("Проверка2--------------------->");
       
       if (!tea) {
         return res.status(404).json(formatResponse(404, "Tea not found"));

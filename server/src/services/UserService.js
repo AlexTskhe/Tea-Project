@@ -3,7 +3,7 @@ const { User } = require("../../db/models");
 class AuthService {
   // Метод регистрации пользователя
   static async register({ email, name, password, role }) {
-    // Ищем пользователя по email, если не найден — создаём
+       // Ищем пользователя по email, если не найден — создаём
     const [user, created] = await User.findOrCreate({
       where: { email }, // Если пользователь с таким email уже есть, created будет false
       defaults: { name, password, role }, // Используется, если создаётся новый пользователь

@@ -35,17 +35,19 @@ export class UserValidator {
     ) {
       return { isValid: false, error: 'Создание пользователя с такими полями не доступно' }
     }
-
-    if (!this.validateMail(email)) {
+    if (!this.validateEmail(email)) {
       return { isValid: false, error: 'Неподдерживаемый формат почты' }
     }
+   
     if (!this.validatePassword(password)) {
       return { isValid: false, error: 'Неподдерживаемый формат пароля. Должен быть сиввол, большая буква, маленькая, цифра и не менее 8 символов.' }
     }
+   
     if (!this.validateRole(role)) {
         return { isValid: false, error: 'Неподдерживаемый формат роли'}
     }
 
+ 
     return { isValid: true, error: null }
   }
 }

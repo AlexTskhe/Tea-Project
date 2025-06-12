@@ -3,7 +3,7 @@ import CommentForm from '../../features/CommentForm/CommentForm';
 import CommentList from '../CommentList/CommentList';
 import { CommentApi } from '../../entities/Comment/CommentApi';
 
-export default function Comments({ tea }) {
+export default function Comments({ tea, user }) {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ export default function Comments({ tea }) {
 
   return (
     <>
-      <CommentForm tea={tea} setComments={setComments} />
+      <CommentForm tea={tea} setComments={setComments} user={user}/>
       <CommentList tea={tea} comments={comments} />
     </>
   );

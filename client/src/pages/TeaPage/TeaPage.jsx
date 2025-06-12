@@ -5,7 +5,7 @@ import { TeaApi } from "../../entities/teas/TeaApi";
 import TeaCard from "../../widgets/TeaCard/TeaCard";
 import { useNavigate } from "react-router";
 
-export default function TeaPage() {
+export default function TeaPage({user}) {
   const [teas, setTeas] = useState([]);
 
   const nav = useNavigate()
@@ -44,7 +44,7 @@ console.log("Проверка--------------------->");
     <>
       <button onClick={()=>{nav('/addCard')}}>Добавить</button>
       {teas.map((el) => (
-        <TeaCard key={el.id} el={el} deleteHandler={deleteHandler} />
+        <TeaCard key={el.id} el={el} deleteHandler={deleteHandler} user={user} />
       ))}
     </>
   );

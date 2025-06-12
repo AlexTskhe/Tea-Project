@@ -13,11 +13,11 @@ module.exports = {
 
     // Teas (userId: 1–5)
     await queryInterface.bulkInsert('Teas', [
-      { name: 'Green Zen', location: 'Kyoto', image: 'green-zen.jpg', description: 'Soothing green tea from Japan.', userId: 1, createdAt: new Date(), updatedAt: new Date() },
-      { name: 'Oolong Blossom', location: 'Taiwan', image: 'oolong-blossom.jpg', description: 'Floral and fruity.', userId: 2, createdAt: new Date(), updatedAt: new Date() },
-      { name: 'Masala Chai', location: 'India', image: 'masala-chai.jpg', description: 'Spicy and energizing.', userId: 3, createdAt: new Date(), updatedAt: new Date() },
-      { name: 'White Peony', location: 'China', image: 'white-peony.jpg', description: 'Delicate white tea.', userId: 4, createdAt: new Date(), updatedAt: new Date() },
-      { name: 'Mint Breeze', location: 'Morocco', image: 'mint-breeze.jpg', description: 'Refreshing mint blend.', userId: 5, createdAt: new Date(), updatedAt: new Date() }
+      { name: 'Green Zen', location: 'Kyoto', image: 'https://cdn.teaworkshop.ru/media/cache/sylius_shop_api/c8/b0/100ddcae524512a5604720c97ac3.jpg', description: 'Soothing green tea from Japan.', userId: 1, createdAt: new Date(), updatedAt: new Date() },
+      { name: 'Oolong Blossom', location: 'Taiwan', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYL996jQ5EoACrmYhVrf8lVB2cuq_qeNCEXePi3frz_ZcPkCbbA0ASS1IaLkMOnMIGQ2Y&usqp=CAU', description: 'Floral and fruity.', userId: 2, createdAt: new Date(), updatedAt: new Date() },
+      { name: 'Masala Chai', location: 'India', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStPnuDxt0hYxc4IYmORumjcX_nYKBP7sRj61vxbrOsMJJRTxLDBo6LFgDewJkS-jsMXno&usqp=CAU', description: 'Spicy and energizing.', userId: 3, createdAt: new Date(), updatedAt: new Date() },
+      { name: 'White Peony', location: 'China', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHn0ViLTDuTkuXog07oWKbyXzi7p9HeYAX3Q&s', description: 'Delicate white tea.', userId: 4, createdAt: new Date(), updatedAt: new Date() },
+      { name: 'Mint Breeze', location: 'Morocco', image: 'https://cdn.teaworkshop.ru/media/cache/sylius_shop_api/c8/b0/100ddcae524512a5604720c97ac3.jpg', description: 'Refreshing mint blend.', userId: 5, createdAt: new Date(), updatedAt: new Date() }
     ], {});
 
     // Comments (userId: 1–5, teaId: 1–5)

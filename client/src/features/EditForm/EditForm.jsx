@@ -33,7 +33,7 @@ export default function EditForm({ tea, setTea, editHeandler }) {
       if (isValid) {
         const data = await TeaApi.update(tea.id, inputs);
 
-        if (data.statusCode === 200 ) {
+        if (data.statusCode === 200) {
           setTea((tea) => ({ ...tea, ...data.data }));
           setInputs(data);
           editHeandler();
@@ -50,6 +50,7 @@ export default function EditForm({ tea, setTea, editHeandler }) {
 
   return (
     <>
+      <img src={tea.image} alt='Tea' />
       <form onSubmit={submitHandler}>
         <input onChange={inputHandler} value={inputs.name} name='name' />
         <input

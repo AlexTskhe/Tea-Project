@@ -6,6 +6,7 @@ class CommentService {
   }
 
   static async addComment(data) {
+    console.log('first', data )
     const newComment = await Comment.create(data);
     const noFormatObj = await Comment.findOne({
       where: { id: newComment.id },

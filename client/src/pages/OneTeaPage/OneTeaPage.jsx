@@ -9,7 +9,7 @@ import CommentForm from '../../features/CommentForm/CommentForm';
 import CommentList from '../../widgets/CommentList/CommentList';
 import Comments from '../../widgets/Comments/Comments';
 
-export default function OneTeaPage() {
+export default function OneTeaPage({ user }) {
   const [tea, setTea] = useState({});
   const [editMode, setEditMode] = useState(true);
 
@@ -19,7 +19,7 @@ export default function OneTeaPage() {
     async function getOneTea() {
       try {
         const data = await TeaApi.getOne(id);
-        if (data.statusCode === 200 ) {
+        if (data.statusCode === 200) {
           setTea(data.data);
         } else {
           console.log(data);
@@ -39,9 +39,9 @@ export default function OneTeaPage() {
     <>
       {editMode ? (
         <>
-          <TeaFullCard tea={tea} />
+          <TeaFullCard tea={tea} user={user}/>
           <button onClick={editHeandler}>Редактировать</button>
-          <Comments tea={tea}/>
+          <Comments tea={tea} user={user}/>
         </>
       ) : (
         <EditForm tea={tea} setTea={setTea} editHeandler={editHeandler} />

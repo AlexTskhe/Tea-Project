@@ -11,14 +11,10 @@ export default function TeaPage({user}) {
   const nav = useNavigate()
 
   async function deleteHandler(id) {
-    
-
     try {
       const data = await TeaApi.delete(id);
-console.log("Проверка--------------------->");
-      console.log(" data:", data);
       if (data.statusCode === 200) {
-        setTeas((teas) => teas.filter((el) => el.id !== Number(data.data)));
+        setTeas((teas) => teas.filter((el) => el.id !== id));
       } else {
         console.log(data);
       }
@@ -31,7 +27,6 @@ console.log("Проверка--------------------->");
     const getTeas = async () => {
       try {
         const { data } = await TeaApi.getAll();
-        // console.log("Проверка1----------------->");
         setTeas(data);
       } catch (error) {
         console.log(error);

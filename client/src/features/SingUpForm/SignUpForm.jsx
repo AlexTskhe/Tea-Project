@@ -27,10 +27,8 @@ export default function SingUpForm({setUser}) {
     try {
         const fullUserData = {...inputs, role: 'user'}
       const { isValid, error } = UserValidator.validate(fullUserData)
- console.log(isValid, 'Проверка----------->')
       if (isValid) {
         const data = await UserApi.signup(fullUserData)
-         console.log(data,'Проверка----------->')
         if (data.statusCode === 201 && data.data.accessToken) {
           setUser(data.data.user) 
           setAccessToken(data.data.accessToken)

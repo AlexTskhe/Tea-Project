@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { TeaApi } from '../../entities/teas/TeaApi';
 import { Link } from 'react-router';
 
-export default function TeaCard({ el, deleteHandler, user }) {
+export default function TeaCard({ el, deleteHandler, user}) {
   const [teaCard, setTeaCard] = useState(el);
   const [toggle, setToggle] = useState(true);
 
@@ -16,14 +16,6 @@ export default function TeaCard({ el, deleteHandler, user }) {
   };
 
 
-//   const updateHandler = async () => {
-//     try {
-//       const data = await TeaApi.update(el.id, teaCard);
-//       console.log('Updated data:', data);
-//       if (data.statusCode === 200) {
-//         toggleHandler();
-
-
    const updateHandler = async () => {
       try {
         const data = await TeaApi.update(el.id, teaCard);
@@ -34,9 +26,6 @@ export default function TeaCard({ el, deleteHandler, user }) {
       } catch (error) {
         console.log(error);
       }
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   return (

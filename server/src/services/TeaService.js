@@ -1,4 +1,4 @@
-const { Tea } = require("../../db/models");
+const { Tea } = require('../../db/models');
 
 class TeaService {
   static async getAllTeas() {
@@ -6,7 +6,10 @@ class TeaService {
     return await Tea.findAll();
   }
 
-  static async addTea(data) {
+  static async addTea(data, role) {
+    if (role !== 'admin') {
+      throw new Error('Unauthorized: Only the author can delete this Tea');
+    }
     return await Tea.create(data);
   }
 
@@ -14,25 +17,25 @@ class TeaService {
     return await Tea.findByPk(id);
   }
 
-  static async editTea(data, id, userId) {
+  static async editTea(data, id, role) {
     const oneTea = await TeaService.getOneTea(id);
-
+    console.log('chek role', role);
     if (oneTea) {
-      // if (oneTea.dataValues.userId !== userId) {
-      //   throw new Error("Unauthorized: Only the author can delete this Tea");
-      // }
+      if (role !== 'admin') {
+        throw new Error('Unauthorized: Only the author can delete this Tea');
+      }
       await oneTea.update(data);
     }
 
     return oneTea;
   }
+
   static async delete(id, user) {
     const tea = await TeaService.getOneTea(id);
-    console.log("----------11111", id, user, tea);
 
     if (tea) {
-      if (tea.userId !== user.userId ) {
-        throw new Error("Unauthorized: Only the author can delete this tea");
+      if (user.role !== 'admin') {
+        throw new Error('Unauthorized: Only the author can delete this tea');
       }
 
       await tea.destroy();

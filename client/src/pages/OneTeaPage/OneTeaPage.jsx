@@ -7,6 +7,7 @@ import EditForm from '../../features/EditForm/EditForm';
 import TeaFullCard from '../../widgets/TeaFullCard/TeaFullCard';
 import CommentForm from '../../features/CommentForm/CommentForm';
 import CommentList from '../../widgets/CommentList/CommentList';
+import Comments from '../../widgets/Comments/Comments';
 
 export default function OneTeaPage() {
   const [tea, setTea] = useState({});
@@ -31,8 +32,8 @@ export default function OneTeaPage() {
   }, [id]);
 
   const editHeandler = () => {
-    setEditMode((prev) => !prev)
-  }
+    setEditMode((prev) => !prev);
+  };
 
   return (
     <>
@@ -40,8 +41,7 @@ export default function OneTeaPage() {
         <>
           <TeaFullCard tea={tea} />
           <button onClick={editHeandler}>Редактировать</button>
-          <CommentForm tea={tea} />
-          <CommentList tea={tea}/>
+          <Comments tea={tea}/>
         </>
       ) : (
         <EditForm tea={tea} setTea={setTea} editHeandler={editHeandler} />

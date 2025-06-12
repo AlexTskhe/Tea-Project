@@ -7,7 +7,7 @@ const defaultValue = {
   teaId: '',
 };
 
-export default function CommentForm({ user, tea }) {
+export default function CommentForm({ user, tea, setComments }) {
   const [inputs, setInputs] = useState(defaultValue);
 
   const inputHandler = (e) => {
@@ -24,12 +24,14 @@ export default function CommentForm({ user, tea }) {
 
       if (isValid) {
         const data = await CommentApi.create(fullCommentData);
-        console.log(data);
+        console.log("-----------", data.data);
+        const {id, commentText, teaId, userId, user.name } = data.data
         // после реализации авторизации удалить дублирование
-        setInputs(data);
+        setInputs(defaultValue);
+        setComments((prev) => ([...prev, {id, commentText, teaId, userId }]))
         ///
         if (data.statusCode === 200 && data.data.accessToken) {
-          setInputs(data);
+          setInputs(defaultValue);
         } else {
           console.log(error);
         }

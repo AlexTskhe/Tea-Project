@@ -1,5 +1,4 @@
-const { where } = require('sequelize');
-const { Comment } = require('../../db/models');
+const { Comment, User } = require('../../db/models');
 
 class CommentService {
   static async getAllComments() {
@@ -7,11 +6,26 @@ class CommentService {
   }
 
   static async addComment(data) {
-    return await Comment.create(data);
+    const newComment = await Comment.create(data);
+    return await Comment.findOne({
+      where: { id: newComment.id },
+      include: {
+        model: User,
+        as: 'user',
+        attributes: ['name'],
+      },
+    });
   }
 
   static async getAllCommentsTea(teaId) {
-    return await Comment.findAll({ where: { teaId } });
+    return await Comment.findAll({
+      where: { teaId },
+      include: {
+        model: User,
+        as: 'user',
+        attributes: ['name'],
+      },
+    });
   }
 
   static async editComment(data, id, authorId) {

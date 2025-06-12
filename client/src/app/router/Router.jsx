@@ -4,8 +4,11 @@ import MainPage from "../../pages/MainPage/MainPage";
 import Layout from "../Layout/Layout";
 import TeaPage from "../../pages/TeaPage/TeaPage";
 import OneTeaPage from "../../pages/OneTeaPage/OneTeaPage";
+
 import SingUpForm from "../../features/SingUpForm/SingUpForm";
 import LoginForm from "../../features/LoginForm/LoginForm";
+import AddCard from "../../pages/AddCard/AddCard";
+
 
 export default function Router({ user, setUser }) {
   return (
@@ -16,6 +19,7 @@ export default function Router({ user, setUser }) {
         <Route path="/login" element={<LoginForm />} />
         <Route path="/teasPage" element={<TeaPage />} />
         <Route path="/teasPage/:id" element={<OneTeaPage />} />
+        <Route path="/addCard" element={<AddCard />} />
       </Route>
     </Routes>
   );

@@ -6,8 +6,9 @@ export class TeaApi {
     return data;
   }
 
-  static async addTea() {
-    const { data } = await axiosInstance.post(`/teas`);
+  static async addTea(tea) {
+    console.log(tea)
+    const { data } = await axiosInstance.post(`/teas`, tea);
     return data;
   }
 

@@ -18,7 +18,7 @@ export default function TeaPage() {
       }
     } catch (error) {
       console.log(error);
-    }
+    } //
   }
 
 

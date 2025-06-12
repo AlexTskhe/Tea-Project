@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt')
 
 class UserController {
     // Регистрация пользователя
-    static async singup(req, res) {
+    static async signup(req, res) {
         const{email, name, password, role} = req.body
 
     // Проверка на обязательные поля

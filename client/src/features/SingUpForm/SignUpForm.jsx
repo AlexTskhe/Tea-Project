@@ -3,10 +3,10 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router';
-import UserValidator from '../../entities/User/User.validator'
-import UserApi from '../../entities/User/UserApi'
+import {UserValidator} from '../../entities/User/User.validator'
+import {UserApi} from '../../entities/User/UserApi'
 import { setAccessToken } from '../../shared/lib/axiosInstance';
-import 
+
 
 const INITIAL_INPUT_DATA = {
   name: '',
@@ -25,19 +25,18 @@ export default function SingUpForm({setUser}) {
   const submitHandler = async (e) => { //обработчик кнопки в форме
     e.preventDefault() //функция, которая запрещает перезагрузку страницы, после нажатия на кнопку в форме
     try {
-      const { isValid, error } = UserValidator.validate(inputs)
-
+        const fullUserData = {...inputs, role: 'user'}
+      const { isValid, error } = UserValidator.validate(fullUserData)
+ console.log(isValid, 'Проверка----------->')
       if (isValid) {
-        const data = await UserApi.register(inputs)
-        if (data.statusCode === 200 && data.data.accessToken) {
-        //   setUsers((pre) => [...pre, data.data.user])
-          setUser((pre) => ({...pre, ...data.data.user}))
-          // * сохраняем токен на клиенте
+        const data = await UserApi.signup(fullUserData)
+         console.log(data,'Проверка----------->')
+        if (data.statusCode === 201 && data.data.accessToken) {
+          setUser(data.data.user) 
           setAccessToken(data.data.accessToken)
           navigate('/teaMap')  
         } else {
-          console.log('============>>', data.response.data)
-          return alert(data.response.data.error)
+          return alert('Ошибка')
         }
       } else {
         console.log('Ошибка из валидатора', error)
@@ -45,7 +44,7 @@ export default function SingUpForm({setUser}) {
       }
     } catch (error) {
       console.log('~~~~~~>>', error)
-      return alert(error.response.data.error)
+      return alert(error)
     }
   }
   return (
@@ -73,13 +72,6 @@ export default function SingUpForm({setUser}) {
         />
       </Form.Group>
 
-       <Form.Group className="mb-3" controlId="formBasicRole">
-        <Form.Label>Role</Form.Label>
-        <Form.Control 
-          type="text" placeholder="role" name='role'
-          value={inputs.role} onChange={changeHandler}
-        />
-      </Form.Group>
       <Button variant="primary" type="submit">
         Submit
       </Button>

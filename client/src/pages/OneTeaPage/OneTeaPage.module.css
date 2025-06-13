@@ -1,0 +1,45 @@
+.container {
+  padding: 5rem 2rem 2rem 2rem; /* 5rem даст достаточное пространство под header */
+  max-width: 800px;
+  margin: 0 auto;
+  background: #f5f7fa;
+  border-radius: 16px;
+  box-shadow: 0 4px 14px #00000020;
+  transform: translateY(30px);
+  animation: fadeInUp 0.7s ease forwards;
+  border: 1px solid #dddddd;
+}
+
+.editBtn {
+  margin-bottom: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background: #edf2ff;
+  color: #33406b;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px #00000020;
+  transition: background 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.editBtn:hover {
+  background: #dce4ff;
+  transform: translateY(-2px);
+}
+
+.cardCoordinates {
+  display: none;
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

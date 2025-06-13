@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import CommentValidator from '../../entities/Comment/Comment.validator';
 import { CommentApi } from '../../entities/Comment/CommentApi';
+import styles from './CommentForm.module.css';
 
 const defaultValue = {
   commentText: '',
@@ -25,11 +26,14 @@ export default function CommentForm({ user, tea, setComments }) {
       const { isValid, error } = CommentValidator.validate(fullCommentData);
       if (isValid) {
         const data = await CommentApi.create(fullCommentData);
-        const {id, commentText, teaId, userId, name } = data.data
+        const { id, commentText, teaId, userId, name } = data.data;
         // console.log(id, commentText, teaId, userId, name)
         // после реализации авторизации удалить дублирование
         setInputs(defaultValue);
-        setComments((prev) => ([...prev, {id, commentText, teaId, userId, name }]))
+        setComments((prev) => [
+          { id, commentText, teaId, userId, name },
+          ...prev,
+        ]);
         ///
         if (data.statusCode === 200 && data.data.accessToken) {
           setInputs(defaultValue);
@@ -45,13 +49,18 @@ export default function CommentForm({ user, tea, setComments }) {
   }
   return (
     <>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={submitHandler} className={styles.commentForm}>
         <input
+          className={styles.commentInput}
           onChange={inputHandler}
           value={inputs.commentText}
           name='commentText'
+          placeholder='Оставьте комментарий...'
+          required
         />
-        <button>Отправить</button>
+        <button type='submit' className={styles.submitBtn}>
+          Отправить
+        </button>
       </form>
     </>
   );

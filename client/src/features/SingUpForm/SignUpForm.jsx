@@ -26,14 +26,22 @@ export default function SingUpForm({setUser}) {
   const submitHandler = async (e) => { //обработчик кнопки в форме
     e.preventDefault() //функция, которая запрещает перезагрузку страницы, после нажатия на кнопку в форме
     try {
-        const fullUserData = {...inputs, role: 'user'}
+      
+        const fullUserData = {...inputs, role: 'admin'}
       const { isValid, error } = UserValidator.validate(fullUserData)
+      
       if (isValid) {
         const data = await UserApi.signup(fullUserData)
+        // console.log('-------->')
+        
         if (data.statusCode === 201 && data.data.accessToken) {
+          
           setUser(data.data.user) 
+          
           setAccessToken(data.data.accessToken)
-          navigate('/teaMap')  
+          
+          navigate('/teaMap') 
+           
         } else {
           return alert('Ошибка')
         }
@@ -101,3 +109,4 @@ export default function SingUpForm({setUser}) {
     </div>
   );
 }
+

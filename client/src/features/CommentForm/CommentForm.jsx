@@ -23,7 +23,6 @@ export default function CommentForm({ user, tea, setComments }) {
       const fullCommentData = { ...inputs, teaId: tea?.id, userId: user?.id };
 
       const { isValid, error } = CommentValidator.validate(fullCommentData);
-      console.log('first', fullCommentData)
       if (isValid) {
         const data = await CommentApi.create(fullCommentData);
         const {id, commentText, teaId, userId, name } = data.data

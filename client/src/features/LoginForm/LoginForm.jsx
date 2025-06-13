@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router';
 
 import { UserApi } from "../../entities/User/UserApi";
 import { setAccessToken } from "../../shared/lib/axiosInstance";
+import styles from './LoginForm.module.css'
 
 const INITIAL_INPUT_DATA = {
   mail: "",
@@ -42,25 +43,42 @@ export default function LoginForm({setUser}) {
   };
 
   return (
-   <Form onSubmit={sumbitHandler}>
-       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control 
-          type="email" placeholder="Enter email" name='email'
-          value={inputs.email} onChange={changeHandler}
-        />
-      </Form.Group>
+  <div className={styles.formContainer}>
+      <form onSubmit={sumbitHandler} className={styles.form}>
+        <div className={styles.formGroup}>
+          <label className={styles.formLabel} htmlFor="email">
+            Email address
+          </label>
+          <input
+            className={styles.formControl}
+            type="email"
+            id="email"
+            placeholder="Enter email"
+            name="email"
+            value={inputs.email}
+            onChange={changeHandler}
+          />
+        </div>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control 
-          type="password" placeholder="Password" name='password'
-          value={inputs.password} onChange={changeHandler}
-        />
-      </Form.Group>
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-    </Form>
+        <div className={styles.formGroup}>
+          <label className={styles.formLabel} htmlFor="password">
+            Password
+          </label>
+          <input
+            className={styles.formControl}
+            type="password"
+            id="password"
+            placeholder="Password"
+            name="password"
+            value={inputs.password}
+            onChange={changeHandler}
+          />
+        </div>
+
+        <button className={styles.buttonSubmit} type="submit">
+          Submit
+        </button>
+      </form>
+    </div>
   );
 }

@@ -26,7 +26,7 @@ export default function SingUpForm({setUser}) {
     e.preventDefault() //функция, которая запрещает перезагрузку страницы, после нажатия на кнопку в форме
     try {
       
-        const fullUserData = {...inputs, role: 'user'}
+        const fullUserData = {...inputs, role: 'admin'}
       const { isValid, error } = UserValidator.validate(fullUserData)
       
       if (isValid) {

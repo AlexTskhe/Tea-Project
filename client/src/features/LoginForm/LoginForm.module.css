@@ -1,3 +1,4 @@
+
 .formContainer {
   max-width: 400px;
   margin: 0 auto;
@@ -33,7 +34,7 @@
   border-radius: 4px;
   padding: 0.8rem;
   border: 1px solid #ccc;
-  width: 100%;
+  width: 93%;
 }
 
 .formControl:focus {

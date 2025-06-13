@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState } from 'react';
 import { TeaApi } from '../../entities/teas/TeaApi';
 import { useParams } from 'react-router';
 import { useEffect } from 'react';
 import EditForm from '../../features/EditForm/EditForm';
 import TeaFullCard from '../../widgets/TeaFullCard/TeaFullCard';
-import CommentForm from '../../features/CommentForm/CommentForm';
-import CommentList from '../../widgets/CommentList/CommentList';
 import Comments from '../../widgets/Comments/Comments';
+import { UserContext } from '../../entities/User/UserContext';
 
-export default function OneTeaPage({ user }) {
+export default function OneTeaPage() {
   const [tea, setTea] = useState({});
   const [editMode, setEditMode] = useState(true);
+  const { user } = useContext(UserContext);
 
   const { id } = useParams();
 
@@ -39,9 +39,11 @@ export default function OneTeaPage({ user }) {
     <>
       {editMode ? (
         <>
-          <TeaFullCard tea={tea} user={user}/>
-          <button onClick={editHeandler}>Редактировать</button>
-          <Comments tea={tea} user={user}/>
+          <TeaFullCard tea={tea} user={user} />
+          {user?.role === 'admin' && (
+            <button onClick={editHeandler}>Редактировать</button>
+          )}
+          <Comments tea={tea} user={user} />
         </>
       ) : (
         <EditForm tea={tea} setTea={setTea} editHeandler={editHeandler} />

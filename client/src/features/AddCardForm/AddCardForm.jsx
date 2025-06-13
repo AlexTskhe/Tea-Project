@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { TeaApi } from '../../entities/teas/TeaApi';
 import { useNavigate } from 'react-router';
 import TeaValidator from '../../shared/utils/TeaValidator';
+import { UserContext } from '../../entities/User/UserContext';
 
 const defaultValue = {
   name: '',
@@ -11,7 +12,7 @@ const defaultValue = {
 };
 
 export default function AddCardForm() {
-
+const {user} = useContext(UserContext)
 const [inputs, setInputs] = useState(defaultValue);
 
 const nav = useNavigate()
@@ -42,17 +43,19 @@ const nav = useNavigate()
   return (
      <>
       <form onSubmit={addHandler}>
-        <input onChange={inputsHandler} value={inputs.name} name='name' />
+        <input onChange={inputsHandler} value={inputs.name} name='name' placeholder='name' />
         <input
           onChange={inputsHandler}
           value={inputs.location}
           name='location'
+          placeholder='location'
         />
-        <input onChange={inputsHandler} value={inputs.image} name='image' />
+        <input onChange={inputsHandler} value={inputs.image} name='image' placeholder='image'/>
         <input
           onChange={inputsHandler}
           value={inputs.description}
           name='description'
+          placeholder='description'
         />
         <button type='submit'>Добавить</button>
       </form>

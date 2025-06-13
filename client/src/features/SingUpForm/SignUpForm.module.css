@@ -1,36 +1,65 @@
-commentForm {
-  display: flex;
-  gap: 0.75rem;
+.formContainer {
+  max-width: 400px;
+  margin: 0 auto;
+  margin-top: 200px;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Эффект при наведении */
+.formContainer:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Стилизация контейнера при фокусе */
+.formContainer:focus {
+  outline: none;
+  border-color: #0056b3;
+  box-shadow: 0 0 8px rgba(0, 86, 179, 0.5);
+}
+
+/* Группа элементов формы */
+.formGroup {
   margin-bottom: 1.5rem;
 }
 
-.commentInput {
-  flex-grow: 1;
-  padding: 0.75rem 1rem;
-  border: 1.5px solid #ccc;
-  border-radius: 24px;
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
+/* Стиль для меток (labels) */
+.formLabel {
+  font-weight: bold;
+  color: #333;
 }
 
-.commentInput:focus {
-  border-color: #3a8e41;
+/* Контролы ввода (input) */
+.formControl {
+  border-radius: 4px;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  width: 93%;
+}
+
+/* Стилизация инпутов при фокусе */
+.formControl:focus {
   outline: none;
-  box-shadow: 0 0 5px #3a8e41aa;
+  border-color: #0056b3;
 }
 
-.submitBtn {
-  background-color: #3a8e41;
-  border: none;
+/* Кнопка отправки формы */
+.buttonSubmit {
+  background-color: #264b2c;
+  border-color: #0056b3;
   color: white;
-  font-weight: 600;
-  font-size: 1rem;
-  padding: 0 1.5rem;
-  border-radius: 24px;
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.submitBtn:hover {
-  background-color: #2f6e34;
+/* Эффект при наведении на кнопку */
+.buttonSubmit:hover {
+  background-color: #1e3d29;
 }

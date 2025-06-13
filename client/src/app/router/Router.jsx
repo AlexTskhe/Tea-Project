@@ -14,8 +14,8 @@ export default function Router({ user, setUser }) {
       <Route path='/' element={<Layout user={user} setUser={setUser} />}>
         <Route path='/teaMap' element={<MainPage />} />
         <Route
-          path='/singup'
-          element={<AuthPage isAuthProp='singup' setUser={setUser} />}
+          path='/signup'
+          element={<AuthPage isAuthProp='signup' setUser={setUser} />}
         />
         <Route
           path='/login'

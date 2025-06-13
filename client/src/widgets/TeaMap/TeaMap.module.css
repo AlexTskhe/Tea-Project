@@ -1,0 +1,8 @@
+.mapContainer {
+  height: 100%;
+  width: 100%;
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px #00000020;
+}

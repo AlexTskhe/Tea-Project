@@ -42,7 +42,16 @@ module.exports = {
           name: 'Eve',
           email: 'eve@example.com',
           password: 'password123',
-          role: 'moderator',
+          role: 'user',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: 'admin',
+          email: 'admin@test.ru',
+          password:
+            '$2b$10$zon9eHd3kwQKKeSZGjjUvu1iPiP/uXO6bB0QDZPuy5LG5hyovhWQq',
+          role: 'admin',
           createdAt: new Date(),
           updatedAt: new Date(),
         },

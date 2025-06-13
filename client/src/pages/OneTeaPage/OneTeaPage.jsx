@@ -7,6 +7,7 @@ import EditForm from '../../features/EditForm/EditForm';
 import TeaFullCard from '../../widgets/TeaFullCard/TeaFullCard';
 import Comments from '../../widgets/Comments/Comments';
 import { UserContext } from '../../entities/User/UserContext';
+import styles from './OneTeaPage.module.css';
 
 export default function OneTeaPage() {
   const [tea, setTea] = useState({});
@@ -36,18 +37,21 @@ export default function OneTeaPage() {
   };
 
   return (
-    <>
+    <div className={styles.container}>
       {editMode ? (
         <>
           <TeaFullCard tea={tea} user={user} />
           {user?.role === 'admin' && (
-            <button onClick={editHeandler}>Редактировать</button>
+            <button onClick={editHeandler} className={styles.editBtn}>
+              Редактировать
+            </button>
           )}
+
           <Comments tea={tea} user={user} />
         </>
       ) : (
         <EditForm tea={tea} setTea={setTea} editHeandler={editHeandler} />
       )}
-    </>
+    </div>
   );
 }

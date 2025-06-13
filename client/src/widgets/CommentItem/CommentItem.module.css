@@ -1,0 +1,11 @@
+.commentAuthor {
+  font-weight: 700;
+  color: #2f6e34;
+  margin-bottom: 0.25rem;
+}
+
+.commentText {
+  color: #333;
+  line-height: 1.4;
+  white-space: pre-wrap;
+}

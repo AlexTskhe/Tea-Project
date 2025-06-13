@@ -3,37 +3,25 @@ import { TeaApi } from '../../entities/teas/TeaApi';
 import L from 'leaflet';
 import TeaMap from '../../widgets/TeaMap/TeaMap';
 import TeaPage from '../TeaPage/TeaPage';
+import { useNavigate } from 'react-router';
 
 export default function MainPage() {
-  const [teas, setTeas] = useState([
-    {
-      id: 1,
-      name: 'Green Dragon',
-      description: 'Light and floral.',
-      latitude: 55.751244,
-      longitude: 37.618423,
-    },
-    {
-      id: 2,
-      name: 'Black Pearl',
-      description: 'Strong and bold.',
-      latitude: 59.9342802,
-      longitude: 30.3350986,
-    },
-    // ...ещё чаи
-  ]);
+  const [teas, setTeas] = useState([]);
+  const navigate = useNavigate()
 
   useEffect(() => {
-    // const getTeas = async () => {
-    //   try {
-    //     const { data } = await TeaApi.getAll();
-    //     setTeas(data);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
-    // getTeas();
+    const getTeas = async () => {
+      try {
+        const { data } = await TeaApi.getAll();
+        setTeas(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getTeas();
+  }, []);
 
+  useEffect(() => {
     const map = L.map('map').setView([55.751244, 37.618423], 5); // Центр РФ
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -41,11 +29,24 @@ export default function MainPage() {
     }).addTo(map);
 
     // Добавляем маркеры на карту
-    teas.forEach((tea) => {
-      if (tea.latitude && tea.longitude) {
-        L.marker([tea.latitude, tea.longitude])
-          .addTo(map)
-          .bindPopup(`<b>${tea.name}</b><br>${tea.description}`);
+    teas?.forEach((tea) => {
+      if (tea.location) {
+        const [latitude, longitude] = tea.location.split(' ');
+
+        L.marker([latitude, longitude]).addTo(map).bindPopup(`  <div>
+    <b>${tea.name}</b><br />
+    <button class="popup-btn" data-id="${tea.id}">Подробнее</button>
+  </div> `);
+      }
+    });
+
+    map.on('popupopen', function (e) {
+      const button = e.popup._contentNode.querySelector('.popup-btn');
+      if (button) {
+        button.addEventListener('click', () => {
+          const teaId = button.getAttribute('data-id');
+          navigate(`/teasPage/${teaId}`); // импортируй useNavigate из react-router-dom
+        });
       }
     });
 

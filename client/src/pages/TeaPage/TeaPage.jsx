@@ -1,15 +1,16 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import { TeaApi } from "../../entities/teas/TeaApi";
-import TeaCard from "../../widgets/TeaCard/TeaCard";
-import { useNavigate } from "react-router";
+import React, { useContext } from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { TeaApi } from '../../entities/teas/TeaApi';
+import TeaCard from '../../widgets/TeaCard/TeaCard';
+import { useNavigate } from 'react-router';
+import { UserContext } from '../../entities/User/UserContext';
 
-export default function TeaPage({user}) {
+export default function TeaPage() {
   const [teas, setTeas] = useState([]);
+  const nav = useNavigate();
 
-  const nav = useNavigate()
-
+  const { user } = useContext(UserContext);
   async function deleteHandler(id) {
     try {
       const data = await TeaApi.delete(id);
@@ -37,9 +38,23 @@ export default function TeaPage({user}) {
 
   return (
     <>
-      <button onClick={()=>{nav('/addCard')}}>Добавить</button>
+      {user?.role === 'admin' && (
+        <button
+          onClick={() => {
+            nav('/addCard');
+          }}
+        >
+          Добавить
+        </button>
+      )}
+
       {teas.map((el) => (
-        <TeaCard key={el.id} el={el} deleteHandler={deleteHandler} user={user} />
+        <TeaCard
+          key={el.id}
+          el={el}
+          deleteHandler={deleteHandler}
+          user={user}
+        />
       ))}
     </>
   );

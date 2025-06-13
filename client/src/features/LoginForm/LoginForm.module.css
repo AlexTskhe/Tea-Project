@@ -1,0 +1,52 @@
+
+.formContainer {
+  max-width: 400px;
+  margin: 0 auto;
+  margin-top: 200px;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.formContainer:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.formContainer:focus {
+  outline: none;
+  border-color: #0056b3;
+  box-shadow: 0 0 8px rgba(0, 86, 179, 0.5);
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.formLabel {
+  font-weight: bold;
+  color: #333;
+}
+
+.formControl {
+  border-radius: 4px;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  width: 93%;
+}
+
+.formControl:focus {
+  outline: none;
+  border-color: #0056b3;
+}
+
+.buttonSubmit {
+  background-color: #264b2c;
+  border-color: #0056b3;
+  color: white;
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 4px;
+}

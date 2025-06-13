@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router';
 import {UserValidator} from '../../entities/User/User.validator'
 import {UserApi} from '../../entities/User/UserApi'
 import { setAccessToken } from '../../shared/lib/axiosInstance';
+import styles from './SignUpForm.module.css'
 
 
 const INITIAL_INPUT_DATA = {
@@ -41,39 +42,62 @@ export default function SingUpForm({setUser}) {
         return alert(error)
       }
     } catch (error) {
-      console.log('~~~~~~>>', error)
+      // console.log('~~~~~~>>', error)
       return alert(error)
     }
   }
   return (
-   <Form onSubmit={submitHandler}>
-      <Form.Group className="mb-3" controlId="formBasicLogin">
-        <Form.Label>Login</Form.Label>
-        <Form.Control 
-          type="text" placeholder="Enter name" name='name'
-          value={inputs.login} onChange={changeHandler}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control 
-          type="email" placeholder="Enter email" name='email'
-          value={inputs.email} onChange={changeHandler}
-        />
-      </Form.Group>
+     <div className={styles.formContainer}>
+      <form onSubmit={submitHandler} className={styles.form}>
+        <div className={styles.formGroup}>
+          <label className={styles.formLabel} htmlFor="name">
+            Login
+          </label>
+          <input
+            className={styles.formControl}
+            type="text"
+            id="name"
+            placeholder="Enter name"
+            name="name"
+            value={inputs.name}
+            onChange={changeHandler}
+          />
+        </div>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control 
-          type="password" placeholder="Password" name='password'
-          value={inputs.password} onChange={changeHandler}
-        />
-      </Form.Group>
+        <div className={styles.formGroup}>
+          <label className={styles.formLabel} htmlFor="email">
+            Email address
+          </label>
+          <input
+            className={styles.formControl}
+            type="email"
+            id="email"
+            placeholder="Enter email"
+            name="email"
+            value={inputs.email}
+            onChange={changeHandler}
+          />
+        </div>
 
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-    </Form>
+        <div className={styles.formGroup}>
+          <label className={styles.formLabel} htmlFor="password">
+            Password
+          </label>
+          <input
+            className={styles.formControl}
+            type="password"
+            id="password"
+            placeholder="Password"
+            name="password"
+            value={inputs.password}
+            onChange={changeHandler}
+          />
+        </div>
+
+        <button className={styles.buttonSubmit} type="submit">
+          Submit
+        </button>
+      </form>
+    </div>
   );
 }
-

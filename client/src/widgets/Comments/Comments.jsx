@@ -24,7 +24,7 @@ export default function Comments({ tea }) {
   return (
     <>
       <section className={styles.commentsWrapper}>
-        {user && (
+        {user?.name && (
           <CommentForm tea={tea} setComments={setComments} user={user} />
         )}
         <CommentList comments={comments} />

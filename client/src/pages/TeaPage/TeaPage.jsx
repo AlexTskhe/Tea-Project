@@ -5,6 +5,7 @@ import { TeaApi } from '../../entities/teas/TeaApi';
 import TeaCard from '../../widgets/TeaCard/TeaCard';
 import { useNavigate } from 'react-router';
 import { UserContext } from '../../entities/User/UserContext';
+import styles from './TeaPage.module.css';
 
 export default function TeaPage() {
   const [teas, setTeas] = useState([]);
@@ -38,24 +39,29 @@ export default function TeaPage() {
 
   return (
     <>
-      {user?.role === 'admin' && (
-        <button
-          onClick={() => {
-            nav('/addCard');
-          }}
-        >
-          Добавить
-        </button>
-      )}
+      <div className={styles.container}>
+        <div className={styles.cardsWrapper}>
+          {user?.role === 'admin' && (
+            <button
+              onClick={() => nav('/addCard')}
+              className={styles.addButton}
+            >
+              Добавить
+            </button>
+          )}
 
-      {teas.map((el) => (
-        <TeaCard
-          key={el.id}
-          el={el}
-          deleteHandler={deleteHandler}
-          user={user}
-        />
-      ))}
+          <div className={styles.cardList}>
+            {teas.map((el) => (
+              <TeaCard
+                key={el.id}
+                el={el}
+                deleteHandler={deleteHandler}
+                user={user}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
     </>
   );
 }

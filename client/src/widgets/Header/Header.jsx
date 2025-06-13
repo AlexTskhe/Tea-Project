@@ -1,29 +1,32 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './Header.module.css';
 import { NavLink, useNavigate } from 'react-router';
 import { UserApi } from '../../entities/User/UserApi';
+
 export default function Header({ user, setUser }) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
   const logoutHandler = async () => {
     try {
-      const data = await UserApi.logout()
+      const data = await UserApi.logout();
       if (data.statusCode === 200) {
-        setUser(() => ({}))
-        navigate('/')
+        setUser({});
+        navigate('/teaMap');
       } else {
-        console.log(data.error)
+        console.log(data.error);
       }
     } catch (error) {
-      console.log(error)
-      return alert(error)
+      console.log(error);
+      return alert(error);
     }
   }
+
   return (
     <header className={styles.header}>
       <NavLink
         to='/teaMap'
         className={({ isActive }) =>
-          `${styles.link} ${isActive ? styles.active : ''}`
+          `${styles.linkTeaMap} ${isActive ? styles.active : ''}`
         }
       >
         Чайная карта
@@ -46,25 +49,26 @@ export default function Header({ user, setUser }) {
         </button>
       ) : (
         <>
-         <NavLink
-        to='/login'
-        className={({ isActive }) =>
-          `${styles.link} ${isActive ? styles.active : ''}`
-        }
-      >
-        Вход
-      </NavLink>
+          <NavLink
+            to='/login'
+            className={({ isActive }) =>
+              `${styles.link} ${isActive ? styles.active : ''}`
+            }
+          >
+            Вход
+          </NavLink>
 
-      <NavLink
-        to='/singup'
-        className={({ isActive }) =>
-          `${styles.link} ${isActive ? styles.active : ''}`
-        }
-      >
-        Регистрация
-      </NavLink>
+          <NavLink
+            to='/signup'
+            className={({ isActive }) =>
+              `${styles.link} ${isActive ? styles.active : ''}`
+            }
+          >
+            Регистрация
+          </NavLink>
         </>
       )}
+
     </header>
   );
 }

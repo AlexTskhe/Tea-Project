@@ -4,10 +4,14 @@ import L from 'leaflet';
 import TeaMap from '../../widgets/TeaMap/TeaMap';
 import TeaPage from '../TeaPage/TeaPage';
 import { useNavigate } from 'react-router';
+import styles from './MainPage.module.css';
+
+
+
 
 export default function MainPage() {
   const [teas, setTeas] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getTeas = async () => {
@@ -56,11 +60,11 @@ export default function MainPage() {
   }, [teas]);
   return (
     <>
-      <div style={{ display: 'flex', height: '100vh' }}>
-        <div style={{ flex: '2', minWidth: 0 }}>
+      <div className={styles.container}>
+        <div className={styles.mapColumn}>
           <TeaMap teas={teas} />
         </div>
-        <div style={{ flex: '1', overflowY: 'auto', padding: '1rem' }}>
+        <div className={styles.teasColumn}>
           <TeaPage teas={teas} />
         </div>
       </div>

@@ -26,7 +26,7 @@ export default function Header({ user, setUser }) {
           `${styles.link} ${isActive ? styles.active : ''}`
         }
       >
-        Главная
+        Чайная карта
       </NavLink>
 
       <NavLink

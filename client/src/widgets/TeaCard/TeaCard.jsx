@@ -1,75 +1,43 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState } from 'react';
 import { TeaApi } from '../../entities/teas/TeaApi';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+import { UserContext } from '../../entities/User/UserContext';
 
-export default function TeaCard({ el, deleteHandler, user}) {
+export default function TeaCard({ el, deleteHandler}) {
   const [teaCard, setTeaCard] = useState(el);
-  const [toggle, setToggle] = useState(true);
-
-  const toggleHandler = () => {
-    setToggle((toggle) => !toggle);
+  const navigate = useNavigate();
+  
+  const readMoreHandler = (e) => {
+    navigate(`/teasPage/${el.id}`);
   };
-
-  const inputHandler = (e) => {
-    setTeaCard((teaCard) => ({ ...teaCard, [e.target.name]: e.target.value }));
-  };
-
-
-   const updateHandler = async () => {
-      try {
-        const data = await TeaApi.update(el.id, teaCard);
-        console.log("Updated data:", data);
-        if (data.statusCode === 200) {
-          toggleHandler();
-        }
-      } catch (error) {
-        console.log(error);
-      }
-  };
+  const {user} = useContext(UserContext)
 
   return (
     <>
       <div>
         <hr />
-
-        {toggle ? (
-          <>
-            <h3>{teaCard.name}</h3>
-            <h4>{teaCard.location}</h4>
-            <img src={teaCard.image} alt='Tea' width="600" height="400" />
-             <h4>{teaCard.description}</h4>
-          </>
-        ) : (
-          <>
-            <input onChange={inputHandler} value={teaCard.name} name='name' />
-            <input
-              onChange={inputHandler}
-              value={teaCard.location}
-              name='location'
-            />
-            <input onChange={inputHandler} value={teaCard.image} name='image' />
-            <input
-              onChange={inputHandler}
-              value={teaCard.description}
-              name='description'
-            />
-          </>
-        )}
-
-        <hr />
-        {/* {toggle ? <button onClick={()=>{toggleHandler()}}>Изменить</button> : <button onClick={()=>{updateHandler}}>Сохранить</button>} */}
-
-        <Link to={`/teasPage/${el.id}`}>Изменить</Link>
+          <h3>{teaCard.name}</h3>
+          <h4>{teaCard.location}</h4>
+          <img src={teaCard.image} alt='Tea' width='600' height='400' />
+          <h4>{teaCard.description}</h4>
 
         <button
+          onClick={readMoreHandler}
+        >
+          Подробнее
+        </button>
+
+        {user?.role === 'admin' && <button
           onClick={() => {
             deleteHandler(el.id);
           }}
         >
           Удалить
-        </button>
+        </button>}
       </div>
     </>
   );
 }
+
+
